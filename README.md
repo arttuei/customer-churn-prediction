@@ -2,9 +2,14 @@
 
 Machine learning project that predicts if a customer is likely to leave a telecom service.
 
-## Dataset
+## Dataset and License
 
-The project uses the IBM Telco Customer Churn dataset.
+The dataset is based on the IBM Telco Customer Churn dataset,
+obtained from https://www.kaggle.com/datasets/yeanzc/telco-customer-churn-ibm-dataset.
+
+The dataset is available under the https://creativecommons.org/licenses/by/4.0/ license.
+
+Original dataset source: https://data.mendeley.com/datasets/phsxg9ssrf/1
 
 The dataset contains information about telecom customers, including:
 
@@ -25,7 +30,6 @@ The `customerID` column is removed because it does not provide useful informatio
 - Python
 - Pandas
 - Scikit-learn
-- Matplotlib
 - Logistic Regression
 - One-Hot Encoding
 - StandardScaler
@@ -51,8 +55,9 @@ The `clean.py` script performs the initial data cleaning:
 1. Reads the original CSV file.
 2. Removes the `customerID` column.
 3. Converts `TotalCharges` to a numeric value.
-4. Converts the target variable `Churn` from `Yes/No` to `1/0`.
-5. Saves the processed dataset.
+4. Removes rows with missing `TotalCharges` values.
+5. Converts the target variable `Churn` from `Yes/No` to `1/0`.
+6. Saves the processed dataset.
 
 Further preprocessing is performed inside the machine learning pipeline in `train.py`.
 
@@ -66,6 +71,12 @@ The preprocessing and model are combined into a Scikit-learn `Pipeline`:
 
 ```text
 Raw data
+   │
+   ▼
+Initial data cleaning
+   │
+   ▼
+Processed dataset
    │
    ▼
 Train / test split
@@ -158,7 +169,7 @@ Some of the strongest negative coefficients were:
 Clone the repository and install the required packages:
 
 ```bash
-pip install pandas scikit-learn matplotlib
+pip install pandas scikit-learn
 ```
 
 Run the data cleaning:
